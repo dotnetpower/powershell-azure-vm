@@ -2,8 +2,12 @@
 az cli 와 파워쉘 스크립트를 이용한 VM 관리 예제 입니다. 향후 bash 쉘로 변경될 수 있으므로 Azure Powershell Module은 사용하지 않습니다.
 
 # 사전 준비 사항
+az cli 도구를 powershell 에서 사용하여 VM 이미지를 만들고, 이미지 갤러리에 등록하고, 등록된 이미지를 신규 VM 을 생성할 때 재 사용하기위해 다음 사전 준비사항이 필요합니다.
+
 ## az cli 도구 설치
+
 [Install Azure CLI on Windows](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=powershell#powershell)
+
 관리자 권한으로 Powershell 을 실행 하고 아래 명령을 실행
 ```powershell
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
@@ -29,7 +33,7 @@ az account show
 ```
 ![](images/2023-03-29-13-20-34.png)
 
-2023년 5월 부터 Windows 에서 az login 할 때 [Web Account Manager](https://learn.microsoft.com/ko-kr/windows/uwp/security/web-account-manager)가 기본 인증자로 설정되므로 다음처럼 미리 설정 필요.
+> 2023년 5월 부터 Windows 에서 az login 할 때 [Web Account Manager](https://learn.microsoft.com/ko-kr/windows/uwp/security/web-account-manager)가 기본 인증자로 설정되므로 다음처럼 미리 설정 필요.
 ```powershell
 az config set core.allow_broker=true
 az account clear
@@ -62,6 +66,7 @@ Write-Host "----- 리소스 그룹 생성 및 다른 예제에 필요한 변수 
 $basevm_location = "KoreaCentral"
 $basevm_rgname = "basevm-rg-koc"
 $gallery_rgname = "gallery-rg-koc"
+$compute_rgname = "compute-rg-koc"
 
 Write-Host "----- 베이스 VM 생성에 필요한 변수 -----" -ForegroundColor Red -BackgroundColor Green
 $basevm_win_name = "mywinvm"
@@ -76,6 +81,8 @@ $basevm_linux_name = "mylinuxvm"
 
 
 # 🚀 Tip
+az cli 전체 설명은 [설명서](https://learn.microsoft.com/ko-kr/cli/azure/)를 참고
+
 ## 도움말
 ```powershell
 명령어의 도움말을 표시 하기 위해서는 `--help` 또는 `-h` 사용
@@ -94,6 +101,7 @@ az account list -h
 ```
 
 ## 결과 쿼리
+[JMESPath 쿼리](https://learn.microsoft.com/ko-kr/cli/azure/query-azure-cli?tabs=concepts%2Cpowershell)
 ```powershell
 # 구독의 이름만 출력
 az account list --query "[].name"
