@@ -46,6 +46,12 @@ az vm run-command invoke -g $basevm_rgname `
    --command-id RunPowerShellScript `
    --scripts "Install-WindowsFeature -name Web-Server -IncludeManagementTools"
 
+# (optional)VM에 chocolatey 설치
+az vm run-command invoke -g $basevm_rgname `
+   -n $basevm_win_name `
+   --command-id RunPowerShellScript `
+   --scripts "Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+
 # 80 포트 열기
 az vm open-port --port 80 --resource-group $basevm_rgname --name $basevm_win_name
 
@@ -54,8 +60,8 @@ start "http://$ip"
 
 # (optional) curl 호출 테스트
 curl $ip
-
 ```
+> run-command 로 chocolatey 를 설치하는 방법과 유사하게 이후에 커스텀 앱을 추가 설치할 수 있습니다.
 
 ## Linux VM 생성
 ```powershell
