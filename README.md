@@ -80,7 +80,7 @@ $basevm_linux_name = "mylinuxvm"
 | [VM 생성](virtual-machine/README.md) | 베이스 이미지를 위한 VM 생성 |
 | [이미지 갤러리 생성](compute-gallery/README.md) | 베이스 이미지를 이용하여 사용자 지정 이미지 저장소, 정의, 버전 생성 |
 | [Storage Account 생성](storage-account/README.md) | Custom Script와 chocolatey를 이용해 필요한 소프트웨어 설치를 위한 powershell 스크립트 저장소 용 |
-| 커스텀 이미지로 VM 생성 | 커스텀 이미지로 VM 생성 후, 필요한 소프트웨어 설치 자동화 |
+| [커스텀 이미지로 VM 생성](virtual-machine-image/README.md) | 커스텀 이미지로 VM 생성 후, 필요한 소프트웨어 설치 자동화 |
 
 
 ## 🚀 Tip
